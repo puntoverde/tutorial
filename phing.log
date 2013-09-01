@@ -1,0 +1,204 @@
+[00;36mBuildfile: /Library/WebServer/Documents/phing_test/pre_commit_build.xml[0m
+[00;32m
+MyApplication > main:
+[0m
+[00;36m     [echo] +------------------------------------------+[0m
+[00;36m     [echo] |                                          |[0m
+[00;36m     [echo] | Pre_Commit_Build                         |[0m
+[00;36m     [echo] |                                          |[0m
+[00;36m     [echo] +------------------------------------------+[0m
+[00;36m[phingcall] Calling Buildfile '/Library/WebServer/Documents/phing_test/pre_commit_build.xml' with target 'check_folder_names'[0m
+[00;32m
+MyApplication > check_folder_names:
+[0m
+[00;36m     [echo] +===================================================+[0m
+[00;36m     [echo] |                                                   |[0m
+[00;36m     [echo] | Check Foldernames                                 |[0m
+[00;36m     [echo] |                                                   |[0m
+[00;36m     [echo] +===================================================+[0m
+[00;36m     [echo]   node (tdb)[0m
+[00;36m     [echo] [0m
+[00;36m[phingcall] Calling Buildfile '/Library/WebServer/Documents/phing_test/pre_commit_build.xml' with target 'check_file_names'[0m
+[00;32m
+MyApplication > check_file_names:
+[0m
+[00;36m     [echo] +===================================================+[0m
+[00;36m     [echo] |                                                   |[0m
+[00;36m     [echo] | Check Filenames                                   |[0m
+[00;36m     [echo] |                                                   |[0m
+[00;36m     [echo] +===================================================+[0m
+[00;36m     [echo] +------------------------------------------+[0m
+[00;36m     [echo] |                                          |[0m
+[00;36m     [echo] | Check PHP Filenames                      |[0m
+[00;36m     [echo] |                                          |[0m
+[00;36m     [echo] +------------------------------------------+[0m
+[00;36m     [echo] [0m
+[00;36m     [echo] +------------------------------------------+[0m
+[00;36m     [echo] |                                          |[0m
+[00;36m     [echo] | Check HTML Filenames                     |[0m
+[00;36m     [echo] |                                          |[0m
+[00;36m     [echo] +------------------------------------------+[0m
+[00;36m[check_filename] Checked: phing.log.html[0m
+[00;36m     [echo] [0m
+[00;36m     [echo] +------------------------------------------+[0m
+[00;36m     [echo] |                                          |[0m
+[00;36m     [echo] | Check Javascript Filenames               |[0m
+[00;36m     [echo] |                                          |[0m
+[00;36m     [echo] +------------------------------------------+[0m
+[00;36m     [echo] [0m
+[00;36m     [echo] +------------------------------------------+[0m
+[00;36m     [echo] |                                          |[0m
+[00;36m     [echo] | Check CSS Filenames                      |[0m
+[00;36m     [echo] |                                          |[0m
+[00;36m     [echo] +------------------------------------------+[0m
+[00;36m     [echo] [0m
+[00;36m     [echo] +------------------------------------------+[0m
+[00;36m     [echo] |                                          |[0m
+[00;36m     [echo] | Check XML Filenames                      |[0m
+[00;36m     [echo] |                                          |[0m
+[00;36m     [echo] +------------------------------------------+[0m
+[00;36m[check_filename] Checked: pre_commit_build.xml[0m
+[00;36m     [echo] [0m
+[00;36m     [echo] +------------------------------------------+[0m
+[00;36m     [echo] |                                          |[0m
+[00;36m     [echo] | Check SQL Filenames                      |[0m
+[00;36m     [echo] |                                          |[0m
+[00;36m     [echo] +------------------------------------------+[0m
+[00;36m     [echo] [0m
+[00;36m     [echo] +------------------------------------------+[0m
+[00;36m     [echo] |                                          |[0m
+[00;36m     [echo] | Check PDF Filenames                      |[0m
+[00;36m     [echo] |                                          |[0m
+[00;36m     [echo] +------------------------------------------+[0m
+[00;36m     [echo] [0m
+[00;36m     [echo] +------------------------------------------+[0m
+[00;36m     [echo] |                                          |[0m
+[00;36m     [echo] | Check Image Filenames                    |[0m
+[00;36m     [echo] |                                          |[0m
+[00;36m     [echo] +------------------------------------------+[0m
+[00;36m     [echo] [0m
+[00;36m     [echo] +------------------------------------------+[0m
+[00;36m     [echo] |                                          |[0m
+[00;36m     [echo] | Check Video Filenames                    |[0m
+[00;36m     [echo] |                                          |[0m
+[00;36m     [echo] +------------------------------------------+[0m
+[00;36m     [echo] [0m
+[00;36m[phingcall] Calling Buildfile '/Library/WebServer/Documents/phing_test/pre_commit_build.xml' with target 'check_syntax'[0m
+[00;32m
+MyApplication > check_syntax:
+[0m
+[00;36m     [echo] +===================================================+[0m
+[00;36m     [echo] |                                                   |[0m
+[00;36m     [echo] | Syntax-Check                                      |[0m
+[00;36m     [echo] |                                                   |[0m
+[00;36m     [echo] +===================================================+[0m
+[00;36m     [echo] +------------------------------------------+[0m
+[00;36m     [echo] |                                          |[0m
+[00;36m     [echo] | PHP Syntax-Check                         |[0m
+[00;36m     [echo] |                                          |[0m
+[00;36m     [echo] +------------------------------------------+[0m
+[00;36m     [echo] [0m
+[00;36m     [echo] +------------------------------------------+[0m
+[00;36m     [echo] |                                          |[0m
+[00;36m     [echo] | HTML Syntax-Check (Validate)             |[0m
+[00;36m     [echo] |                                          |[0m
+[00;36m     [echo] +------------------------------------------+[0m
+[00;36m     [echo] [0m
+[00;36m     [echo] +------------------------------------------+[0m
+[00;36m     [echo] |                                          |[0m
+[00;36m     [echo] | JavaScript Syntax-Check                  |[0m
+[00;36m     [echo] |                                          |[0m
+[00;36m     [echo] +------------------------------------------+[0m
+[00;36m     [echo] [0m
+[00;36m     [echo] +------------------------------------------+[0m
+[00;36m     [echo] |                                          |[0m
+[00;36m     [echo] | CSS Syntax-Check (Validate)              |[0m
+[00;36m     [echo] |                                          |[0m
+[00;36m     [echo] +------------------------------------------+[0m
+[00;36m     [echo]   none (tbd)[0m
+[00;36m     [echo] +------------------------------------------+[0m
+[00;36m     [echo] |                                          |[0m
+[00;36m     [echo] | XML Syntax-Check (Validate)              |[0m
+[00;36m     [echo] |                                          |[0m
+[00;36m     [echo] +------------------------------------------+[0m
+[00;36m     [echo]   none (tbd)[0m
+[00;36m     [echo] +------------------------------------------+[0m
+[00;36m     [echo] |                                          |[0m
+[00;36m     [echo] | SQL Syntax-Check                         |[0m
+[00;36m     [echo] |                                          |[0m
+[00;36m     [echo] +------------------------------------------+[0m
+[00;36m     [echo]   none (tbd)[0m
+[00;36m[phingcall] Calling Buildfile '/Library/WebServer/Documents/phing_test/pre_commit_build.xml' with target 'check_coding_guideline'[0m
+[00;32m
+MyApplication > check_coding_guideline:
+[0m
+[00;36m     [echo] +===================================================+[0m
+[00;36m     [echo] |                                                   |[0m
+[00;36m     [echo] | Check Coding-Guideline                           |[0m
+[00;36m     [echo] |                                                   |[0m
+[00;36m     [echo] +===================================================+[0m
+[00;36m     [echo] +------------------------------------------+[0m
+[00;36m     [echo] |                                          |[0m
+[00;36m     [echo] | PHP Check PSR-1 Coding-Guideline         |[0m
+[00;36m     [echo] |                                          |[0m
+[00;36m     [echo] +------------------------------------------+[0m
+[01;35m[phpcodesniffer] /Library/WebServer/Documents/phing_test/./app/index_test.php: 1 warning detected[0m
+[01;35m[phpcodesniffer] WARNING in line 1 column 1: A file should declare new symbols (classes, functions, constants, etc.) and cause no other side effects, or it should execute logic with side effects, but should not do both. The first symbol is defined on line 29 and the first side effect is on line 16.[0m
+[00;36m[phpcodesniffer] 3 files were checked[0m
+[00;36m[phpcodesniffer] 1 warning detected[0m
+[00;36m     [echo] +------------------------------------------+[0m
+[00;36m     [echo] |                                          |[0m
+[00;36m     [echo] | PHP Check PSR-2 Coding-Guideline         |[0m
+[00;36m     [echo] |                                          |[0m
+[00;36m     [echo] +------------------------------------------+[0m
+[01;35m[phpcodesniffer] /Library/WebServer/Documents/phing_test/./app/index_test.php: 1 warning detected[0m
+[01;35m[phpcodesniffer] WARNING in line 1 column 1: A file should declare new symbols (classes, functions, constants, etc.) and cause no other side effects, or it should execute logic with side effects, but should not do both. The first symbol is defined on line 29 and the first side effect is on line 16.[0m
+[00;36m[phpcodesniffer] 3 files were checked[0m
+[00;36m[phpcodesniffer] 1 warning detected[0m
+[00;36m     [echo] +------------------------------------------+[0m
+[00;36m     [echo] |                                          |[0m
+[00;36m     [echo] | PHP Check PEAR Coding-Guideline          |[0m
+[00;36m     [echo] |                                          |[0m
+[00;36m     [echo] +------------------------------------------+[0m
+[01;35m[phpcodesniffer] /Library/WebServer/Documents/phing_test/./app/index Kopie.php: 1 warning detected[0m
+[01;35m[phpcodesniffer] WARNING in line 9 column 1: PHP version not specified[0m
+[01;35m[phpcodesniffer] /Library/WebServer/Documents/phing_test/./app/index.php: 1 warning detected[0m
+[01;35m[phpcodesniffer] WARNING in line 9 column 1: PHP version not specified[0m
+[00;36m[phpcodesniffer] 3 files were checked[0m
+[00;36m[phpcodesniffer] 2 warnings detected[0m
+[00;36m     [echo] +------------------------------------------+[0m
+[00;36m     [echo] |                                          |[0m
+[00;36m     [echo] | Javascript Check Coding-Guideline        |[0m
+[00;36m     [echo] |                                          |[0m
+[00;36m     [echo] +------------------------------------------+[0m
+[00;36m     [echo]   none (tbd)[0m
+[00;36m[phingcall] Calling Buildfile '/Library/WebServer/Documents/phing_test/pre_commit_build.xml' with target 'unit_test'[0m
+[00;32m
+MyApplication > unit_test:
+[0m
+[00;36m     [echo] +===================================================+[0m
+[00;36m     [echo] |                                                   |[0m
+[00;36m     [echo] | UnitTests                                         |[0m
+[00;36m     [echo] |                                                   |[0m
+[00;36m     [echo] +===================================================+[0m
+[00;36m     [echo] +------------------------------------------+[0m
+[00;36m     [echo] |                                          |[0m
+[00;36m     [echo] | PHP-UnitTest                             |[0m
+[00;36m     [echo] |                                          |[0m
+[00;36m     [echo] +------------------------------------------+[0m
+[00;36m  [phpunit] Total tests run: 1, Failures: 0, Errors: 0, Incomplete: 0, Skipped: 0, Time elapsed: 0.00303 s[0m
+[00;36m     [echo] +------------------------------------------+[0m
+[00;36m     [echo] |                                          |[0m
+[00;36m     [echo] | Javascript-UnitTest                      |[0m
+[00;36m     [echo] |                                          |[0m
+[00;36m     [echo] +------------------------------------------+[0m
+[00;36m     [echo]   none (tbd)[0m
+[00;36m[phingcall] Calling Buildfile '/Library/WebServer/Documents/phing_test/pre_commit_build.xml' with target 'generate_documentation'[0m
+[00;32m
+MyApplication > generate_documentation:
+[0m
+[00;32m
+BUILD FINISHED
+
+Total time: 1.9491 second
+[0m
