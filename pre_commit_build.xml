@@ -1,0 +1,582 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- /**
+ * pre_commit_build.xml
+ *
+ * Build-Script, um die Dateien, die in die Versionsverwaltung git
+ * eingecheckt werden sollen, vorher auf Standards zu überprüfen
+ *
+ * Überprüft auf
+ * - Namen der Ordner
+ * - Dateinamen
+ * - Syntax
+ * - Codeing-Guidelines
+ * - UnitTests
+ *
+ * @version   1, 2013-08-31
+ * @since     2013-08-31
+ *
+ * @project   teiresias
+ *
+ * @example   phing -f pre_commit_build.xml
+ *
+ * @author    shu
+ * @copyright campanori
+ * @licence
+ *
+ * @todo      Siehe unten im Code (tdb)
+ * @todo      Übergabe der Dateinamen aus dem pre-commit von Git. Wie geht das? Es sollen nur Dateien aus dem Commit geprüft werden.
+ * @todo      Wie kann das Ergebnis in einer Datei mitgeschrieben werden, die dann von Git angezeigt wird?
+ * @todo      Wie kann das commit von git unterbrochen werden, wenn es hier zu Fehlern kommt?
+ * @todo      XML-Dateien gegen XSL/DTD prüfen.
+ * @todo      JavaScript-Syntax-Check enthält einen absoluten Pfad zum auszuführenden Programm. Platformunabhöngig gestalten.
+ */ -->
+
+<project name="MyApplication" default="main" basedir=".">
+ 
+    <!-- Auswahl der Dateien, die geprüft werden sollen -->
+
+        <!-- Auswahl aller PHP-Dateien -->
+
+            <fileset id="php_project_files" dir="app">
+                <include name="*.php" />
+                <include name="**/*.php" />
+                <include name="*.phpi" />
+                <include name="**/*.phpi" />
+            </fileset>
+
+        <!-- Auswahl aller HTML-Dateien -->
+
+            <fileset id="html_project_files" dir="app">
+                <include name="*.html" />
+                <include name="**/*.html" />
+            </fileset>
+
+        <!-- Auswahl aller Javascript-Dateien -->
+
+            <fileset id="javascript_project_files" dir="app">
+                <include name="*.js" />
+                <include name="**/*.js" />
+            </fileset>
+
+        <!-- Auswahl aller css-Dateien -->
+
+            <fileset id="css_project_files" dir="app">
+                <include name="*.css" />
+                <include name="**/*.css" />
+            </fileset>
+
+        <!-- Auswahl aller XML-Dateien -->
+
+            <fileset id="xml_project_files" dir="app">
+                <include name="*.xml" />
+                <include name="**/*.xml" />
+            </fileset>
+
+        <!-- Auswahl aller SQL-Dateien -->
+
+            <fileset id="sql_project_files" dir="app">
+                <include name="*.sql" />
+                <include name="**/*.sql" />
+            </fileset>
+
+        <!-- Auswahl aller PDF-Dateien -->
+
+            <fileset id="pdf_project_files" dir="app">
+                <include name="*.pdf" />
+                <include name="**/*.pdf" />
+            </fileset>
+
+        <!-- Auswahl aller Image-Dateien -->
+
+            <fileset id="image_project_files" dir="app">
+                <include name="*.png" />
+                <include name="**/*.png" />
+            </fileset>
+
+        <!-- Auswahl aller Video-Dateien -->
+
+            <fileset id="video_project_files" dir=".">
+                <include name="*.m4v" />
+                <include name="**/*.m4v" />
+            </fileset>
+
+    <!-- pre_commit_build -->
+
+        <target name="main">
+
+            <echo message="+------------------------------------------+"/>
+            <echo message="|                                          |"/>
+            <echo message="| Pre_Commit_Build                         |"/>
+            <echo message="|                                          |"/>
+            <echo message="+------------------------------------------+"/>
+
+            <phingcall target="check_folder_names" />
+            <phingcall target="check_file_names" />
+            <phingcall target="check_syntax" />
+            <phingcall target="check_coding_guideline" />
+            <phingcall target="unit_test" />
+           <!-- <phingcall target="generate_documentation" /> -->
+
+        </target>
+
+    <!-- /**
+     * check_folder_names
+     * 
+     * Überprüft die Ordnernamen, ob diese der Konvention entsprechen
+     *
+     * Der Ordnernamen darf a-z 0-9 . - _ enthalten
+     *
+     * @todo Die Routine muß noch erstellt werden.
+     */ -->
+
+        <target name="check_folder_names">
+
+            <echo message="+===================================================+"/>
+            <echo message="|                                                   |"/>
+            <echo message="| Check Foldernames                                 |"/>
+            <echo message="|                                                   |"/>
+            <echo message="+===================================================+"/>
+
+                <echo message="  node (tdb)" />
+
+                <echo message="" />
+
+        </target>
+
+    <!-- /**
+     * check_file_names
+     *
+     * Überprüft die Dateinamen, ob diese der Konvention entsprechen
+     *
+     * Der Dateiname darf a-z 0-9 . - _ enthalten
+     *
+     * @todo adhoc-task in eine eigene Task-Definition auslagern
+     */ -->
+
+        <target name="check_file_names">
+
+            <echo message="+===================================================+"/>
+            <echo message="|                                                   |"/>
+            <echo message="| Check Filenames                                   |"/>
+            <echo message="|                                                   |"/>
+            <echo message="+===================================================+"/>
+
+                <!-- Definition eines adhoc-task, der die Dateinamen prüft -->
+
+                <!-- /**
+                 * @todo Die Anzahl der getesteten Dateien und die Anzahl der fehlerhaften Dateien anzeigen.
+                 * @todo $filename enthält momentan noch den Pfadnamen. Der muß weg.
+                 */ -->
+
+                    <property name="failure" value="0" />
+
+                    <adhoc-task name="check_filename"><![CDATA[
+                        class CheckFileName extends Task {
+
+                             /** Any filesets of files that should be appended. */
+                            private $filesets = array();
+
+                            /**
+                             * Nested creator, adds a set of files (nested <fileset> attribute).
+                             * This is for when you don't care what order files get appended.
+                             * @return FileSet
+                             */
+                            function createFileSet() {
+                                $num = array_push($this->filesets, new FileSet());
+                                return $this->filesets[$num-1];
+                            }
+                        
+                            function main() {
+                                $this->project->setProperty('failure', '0');
+                                // append any files in filesets
+                                foreach($this->filesets as $fs) {
+                                        try {
+                                                $files = $fs->getDirectoryScanner($this->project)->getIncludedFiles();
+                                                foreach ($files as $file) {
+                                                    
+                                                    if (preg_match('/^[a-z0-9-._]+$/', $file)) {
+                                                        $this->log("Checked: " . $file);
+                                                    } else {
+                                                        $this->log("Error: " . $file . " : Allowed are only a-z 0-9 . - _", Project::MSG_ERR);
+                                                        $this->project->setProperty('failure', '1');
+                                                    }
+                                                }
+                                        } catch (BuildException $be) {
+                                                $this->log($be->getMessage(), Project::MSG_WARN);
+                                        }
+                                }
+
+                                
+                                
+                            }
+
+                        }
+
+                    ]]></adhoc-task>
+
+                <!-- Prüfung der PHP-Dateien -->
+
+                    <echo message="+------------------------------------------+"/>
+                    <echo message="|                                          |"/>
+                    <echo message="| Check PHP Filenames                      |"/>
+                    <echo message="|                                          |"/>
+                    <echo message="+------------------------------------------+"/>
+
+                        <check_filename>
+                            <fileset refid="php_project_files" />
+                        </check_filename>
+
+                        <echo message="Fehler ${failure}" />
+
+                <!-- Prüfung der HTML-Dateien -->
+
+                    <echo message="+------------------------------------------+"/>
+                    <echo message="|                                          |"/>
+                    <echo message="| Check HTML Filenames                     |"/>
+                    <echo message="|                                          |"/>
+                    <echo message="+------------------------------------------+"/>
+
+                        <check_filename>
+                            <fileset refid="html_project_files" />
+                        </check_filename>
+
+                        <echo message="" />
+
+                <!-- Prüfung der Javascript-Dateien -->
+
+                    <echo message="+------------------------------------------+"/>
+                    <echo message="|                                          |"/>
+                    <echo message="| Check Javascript Filenames               |"/>
+                    <echo message="|                                          |"/>
+                    <echo message="+------------------------------------------+"/>
+
+                        <check_filename>
+                            <fileset refid="javascript_project_files" />
+                        </check_filename>
+
+                        <echo message="" />
+
+                <!-- Prüfung der CSS-Dateien -->
+
+                    <echo message="+------------------------------------------+"/>
+                    <echo message="|                                          |"/>
+                    <echo message="| Check CSS Filenames                      |"/>
+                    <echo message="|                                          |"/>
+                    <echo message="+------------------------------------------+"/>
+
+                        <check_filename>
+                            <fileset refid="css_project_files" />
+                        </check_filename>
+
+                        <echo message="" />
+
+                <!-- Prüfung der XML-Dateien -->
+
+                    <echo message="+------------------------------------------+"/>
+                    <echo message="|                                          |"/>
+                    <echo message="| Check XML Filenames                      |"/>
+                    <echo message="|                                          |"/>
+                    <echo message="+------------------------------------------+"/>
+
+                        <check_filename>
+                            <fileset refid="xml_project_files" />
+                        </check_filename>
+
+                        <echo message="" />
+
+                <!-- Prüfung der SQL-Dateien -->
+
+                    <echo message="+------------------------------------------+"/>
+                    <echo message="|                                          |"/>
+                    <echo message="| Check SQL Filenames                      |"/>
+                    <echo message="|                                          |"/>
+                    <echo message="+------------------------------------------+"/>
+
+                        <check_filename>
+                            <fileset refid="sql_project_files" />
+                        </check_filename>
+
+                        <echo message="" />
+
+                <!-- Prüfung der PDF-Dateien -->
+
+                    <echo message="+------------------------------------------+"/>
+                    <echo message="|                                          |"/>
+                    <echo message="| Check PDF Filenames                      |"/>
+                    <echo message="|                                          |"/>
+                    <echo message="+------------------------------------------+"/>
+
+                        <check_filename>
+                            <fileset refid="pdf_project_files" />
+                        </check_filename>
+
+                        <echo message="" />
+
+                <!-- Prüfung der Images-Dateien -->
+
+                    <echo message="+------------------------------------------+"/>
+                    <echo message="|                                          |"/>
+                    <echo message="| Check Image Filenames                    |"/>
+                    <echo message="|                                          |"/>
+                    <echo message="+------------------------------------------+"/>
+
+                        <check_filename>
+                            <fileset refid="image_project_files" />
+                        </check_filename>
+
+                        <echo message="" />
+
+                <!-- Prüfung der Video-Dateien -->
+
+                    <echo message="+------------------------------------------+"/>
+                    <echo message="|                                          |"/>
+                    <echo message="| Check Video Filenames                    |"/>
+                    <echo message="|                                          |"/>
+                    <echo message="+------------------------------------------+"/>
+
+                        <check_filename>
+                            <fileset refid="video_project_files" />
+                        </check_filename>
+
+                        <echo message="" />
+
+        </target>
+
+
+    <!-- /**
+     * check_syntax
+     *
+     * Überprüfung des Dateiinhalts auf Syntax-Fehler
+     *
+     * @todo Bisher nur für PHP und Javascript. Die anderen Formate müssen noch gemacht werden.
+     */ -->
+
+        <target name="check_syntax">
+
+            <echo message="+===================================================+"/>
+            <echo message="|                                                   |"/>
+            <echo message="| Syntax-Check                                      |"/>
+            <echo message="|                                                   |"/>
+            <echo message="+===================================================+"/>
+
+            <!-- Prüfung der PHP-Dateien -->
+
+                <echo message="+------------------------------------------+"/>
+                <echo message="|                                          |"/>
+                <echo message="| PHP Syntax-Check                         |"/>
+                <echo message="|                                          |"/>
+                <echo message="+------------------------------------------+"/>
+
+                    <phplint level="verbose" haltonfailure="false">
+                        <fileset refid="php_project_files" />
+                    </phplint>
+
+                    <echo message="" />
+
+            <!-- Prüfung der HTML-Dateien -->
+
+                <echo message="+------------------------------------------+"/>
+                <echo message="|                                          |"/>
+                <echo message="| HTML Syntax-Check (Validate)             |"/>
+                <echo message="|                                          |"/>
+                <echo message="+------------------------------------------+"/>
+
+                    <echo message="" />
+
+            <!--  /**
+             * Prüfung der JavaScript-Dateien 
+             *
+             * @require JSLint www.jslint.net
+             */ -->
+
+
+                <echo message="+------------------------------------------+"/>
+                <echo message="|                                          |"/>
+                <echo message="| JavaScript Syntax-Check                  |"/>
+                <echo message="|                                          |"/>
+                <echo message="+------------------------------------------+"/>
+
+                    <!-- Wo befindet sich JSLint und die zugehörige Konfigurationsdatei -->
+
+                        <property name="jslint" value="/Users/stefanhupe/Library/JSLint/jsl" />
+                        <property name="jslint_config" value="/Users/stefanhupe/Library/JSLint/jsl.deafult.conf" />
+
+                    <jsllint haltonfailure="false" executable="${jslint}" conffile="{$jslint_conf}">
+                        <fileset refid="javascript_project_files" />
+                    </jsllint>
+
+                    <echo message="" />
+
+            <!-- /**
+             * Prüfung der CSS-Dateien 
+             *
+             * @require CSSLint
+             */ -->
+
+                <echo message="+------------------------------------------+"/>
+                <echo message="|                                          |"/>
+                <echo message="| CSS Syntax-Check (Validate)              |"/>
+                <echo message="|                                          |"/>
+                <echo message="+------------------------------------------+"/>
+
+                    <echo message="  none (tbd)" />
+
+            <!-- Prüfung der XML-Dateien -->
+
+                <echo message="+------------------------------------------+"/>
+                <echo message="|                                          |"/>
+                <echo message="| XML Syntax-Check (Validate)              |"/>
+                <echo message="|                                          |"/>
+                <echo message="+------------------------------------------+"/>
+
+                    <echo message="  none (tbd)" />
+
+            <!-- Prüfung der SQL-Dateien -->
+
+                <echo message="+------------------------------------------+"/>
+                <echo message="|                                          |"/>
+                <echo message="| SQL Syntax-Check                         |"/>
+                <echo message="|                                          |"/>
+                <echo message="+------------------------------------------+"/>
+
+                    <echo message="  none (tbd)" />
+
+        </target>
+
+    <!-- /**
+     * check_coding-guideline Prüfung, ob der Code der Codeing-Guideline nach PSR entspricht 
+     *
+     * Prüft, ob die Dateien den Programmierkonventionen der Coding-Guidelines entsprechen
+     *
+     * @todo Bisher nur für PHP gemacht. Für die anderen Sprachen muß es noch geprüft werden.
+     * @todo Eigene Sniffer-Definition für Doc-Blocs statt PEAR-Standard schreiben.
+     */-->
+
+        <target name="check_coding_guideline">
+
+            <echo message="+===================================================+"/>
+            <echo message="|                                                   |"/>
+            <echo message="| Check Coding-Guideline                           |"/>
+            <echo message="|                                                   |"/>
+            <echo message="+===================================================+"/>
+
+            <!-- /**
+             * PHP-Code prüfen 
+             *
+             * @require PHP_CodeSniffer
+             */ -->
+
+                <!-- Prüfen auf PSR-1 -->
+
+                    <echo message="+------------------------------------------+"/>
+                    <echo message="|                                          |"/>
+                    <echo message="| PHP Check PSR-1 Coding-Guideline         |"/>
+                    <echo message="|                                          |"/>
+                    <echo message="+------------------------------------------+"/>
+
+                        <phpcodesniffer standard="PSR1" haltonerror="false">
+                            <fileset refid="php_project_files" />
+                        </phpcodesniffer>
+
+                <!-- Prüfen auf PSR-2 -->
+
+                    <echo message="+------------------------------------------+"/>
+                    <echo message="|                                          |"/>
+                    <echo message="| PHP Check PSR-2 Coding-Guideline         |"/>
+                    <echo message="|                                          |"/>
+                    <echo message="+------------------------------------------+"/>
+
+                        <phpcodesniffer standard="PSR2" haltonerror="false">
+                            <fileset refid="php_project_files" />
+                        </phpcodesniffer>
+
+                <!-- Prüfen auf DocBloc nach PEAR -->
+
+                    <echo message="+------------------------------------------+"/>
+                    <echo message="|                                          |"/>
+                    <echo message="| PHP Check PEAR Coding-Guideline          |"/>
+                    <echo message="|                                          |"/>
+                    <echo message="+------------------------------------------+"/>
+
+                        <phpcodesniffer standard="PEAR" haltonerror="false">
+                            <fileset refid="php_project_files" />
+                        </phpcodesniffer>
+
+            <!-- JavaScript-Code prüfen -->
+
+                <echo message="+------------------------------------------+"/>
+                <echo message="|                                          |"/>
+                <echo message="| Javascript Check Coding-Guideline        |"/>
+                <echo message="|                                          |"/>
+                <echo message="+------------------------------------------+"/>
+
+                    <echo message="  none (tbd)" />
+
+        </target>
+
+    <!-- /**
+     * unit_test
+     *
+     * Führt die Unit-Tests für PHP und Javascript aus
+     */ -->
+
+        <target name="unit_test">
+
+            <echo message="+===================================================+"/>
+            <echo message="|                                                   |"/>
+            <echo message="| UnitTests                                         |"/>
+            <echo message="|                                                   |"/>
+            <echo message="+===================================================+"/>
+
+            <!-- /**
+             * PHP-Unit-Tests -
+             * 
+             * @require PHPUnit
+             */ -->
+
+                <echo message="+------------------------------------------+"/>
+                <echo message="|                                          |"/>
+                <echo message="| PHP-UnitTest                             |"/>
+                <echo message="|                                          |"/>
+                <echo message="+------------------------------------------+"/>
+
+                    <phpunit haltonfailure="false" printsummary="true">
+
+                        <batchtest>
+                            <fileset dir="app">
+                              <include name="*_test.php"/>
+                            </fileset>
+                        </batchtest>
+
+                    </phpunit>
+
+            <!-- Javascript-Unit-Tests -->
+
+                <echo message="+------------------------------------------+"/>
+                <echo message="|                                          |"/>
+                <echo message="| Javascript-UnitTest                      |"/>
+                <echo message="|                                          |"/>
+                <echo message="+------------------------------------------+"/>
+
+                    <echo message="  none (tbd)" />
+
+        </target>
+
+    <!-- /**
+     * generate_documentation
+     *
+     * Erzeugt eine API-Dokumentation des Codes im Ordner doc
+     * 
+     * @require PHPDocumentator2 www.phpdoc.org
+     */ -->
+
+        <target name="generate_documentation">
+
+            <phpdoc2 title="API Documentation" destdir="apidocs" template="responsive-twig">
+                <fileset refid="php_project_files" />
+            </phpdoc2>
+
+        </target>
+ 
+</project>
